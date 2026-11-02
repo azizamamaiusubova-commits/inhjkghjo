@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АкваБлеск | Современная Автомойка</title>
+    <style>
+        :root {
+            --primary: #0076fe;
+            --primary-dark: #0056b3;
+            --secondary: #00d2ff;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #4a5568;
+            --accent: #ffb703;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3748 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cbd5e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26, 32, 44, 0.85), rgba(26, 32, 44, 0.85)), url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #e2e8f0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 118, 254, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            text-align: center;
+            border-top: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card.standard { border-top-color: var(--secondary); }
+        .card.premium { border-top-color: var(--primary); position: relative; }
+        .card.lux { border-top-color: var(--dark); }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: var(--dark);
+        }
+
+        .price span {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: normal;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .card ul li {
+            margin-bottom: 12px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card ul li::before {
+            content: '✓';
+            color: #38a169;
+            font-weight: bold;
+        }
+
+        .about {
+            background-color: #edf2f7;
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .contacts {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .contacts-grid { grid-template-columns: 1fr; }
+            .nav-wrapper { flex-direction: column; gap: 15px; }
+            .hero h1 { font-size: 32px; }
+        }
+
+        .info-box h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item label {
+            font-weight: bold;
+            color: var(--gray);
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .info-item span {
+            font-size: 18px;
+        }
+
+        .booking-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: #a0aec0;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #2d3748;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">🧽 Аква<span>Блеск</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Вернем вашему авто <span>первозданный блеск</span></h1>
+            <p>Профессиональный уход, премиальная химия и бережное отношение к каждой детали вашего автомобиля.</p>
+            <a href="#contacts" class="btn">Записаться на мойку</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Наши Услуги</h2>
+            <div class="grid">
+                <div class="card standard">
+                    <h3>Стандарт</h3>
+                    <div class="price">800 <span>сум/руб</span></div>
+                    <ul>
+                        <li>Наружная мойка кузова</li>
+                        <li>Шампунь + активная пена</li>
+                        <li>Сушка кузова и порогов</li>
+                        <li>Мойка ковриков</li>
+                    </ul>
+                    <a href="#contacts" class="btn" style="padding: 10px 25px; font-size: 14px;">Выбрать</a>
+                </div>
+                
+                <div class="card premium">
+                    <div class="badge">Популярно</div>
+                    <h3>Премиум Комплекс</h3>
+                    <div class="price">1 500 <span>сум/руб</span></div>
+                    <ul>
+                        <li>Все услуги «Стандарта»</li>
+                        <li>Влажная уборка салона</li>
+                        <li>Очистка стекол изнутри</li>
+                        <li>Пылесос салона и багажника</li>
+                        <li>Чернение резины</li>
+                    </ul>
+                    <a href="#contacts" class="btn" style="padding: 10px 25px; font-size: 14px;">Выбрать</a>
+                </div>
+
+                <div class="card lux">
+                    <h3>Детейлинг Люкс</h3>
+                    <div class="price">3 500 <span>сум/руб</span></div>
+                    <ul>
+                        <li>Все услуги «Премиума»</li>
+                        <li>Обезжиривание кузова</li>
+                        <li>Нанесение жидкого воска</li>
+                        <li>Кондиционер кожи/пластика</li>
+                        <li>Чистка дисков от налета</li>
+                    </ul>
+                    <a href="#contacts" class="btn" style="padding: 10px 25px; font-size: 14px;">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 style="font-size: 36px; margin-bottom: 20px;">Почему выбирают нас</h2>
+                    <p>Мы используем только сертифицированную европейскую автохимию, которая абсолютно безопасна для лакокрасочного покрытия и элементов отделки вашего авто.</p>
+                    <p>Наши мастера проходят регулярное обучение и знают тонкости ухода как за классическими покрытиями, так и за современными защитными пленками и керамикой.</p>
+                    <div class="features-list">
+                        <div class="feature-item">⏱ Мойка от 30 минут</div>
+                        <div class="feature-item">☕ Уютная зона ожидания</div>
+                        <div class="feature-item">🛡 Гарантия безопасности</div>
+                        <div class="feature-item">💳 Любая форма оплаты</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты и Запись</h2>
+            <div class="contacts-grid">
+                <div class="info-box">
+                    <h3>Ждем вас ежедневно</h3>
+                    <div class="info-item">
+                        <label>Адрес</label>
+                        <span>ул. Мирзо Улугбека, 45, Ташкент, Узбекистан</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Телефон</label>
+                        <span>+998 (90) 123-45-67</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Режим работы</label>
+                        <span>Круглосуточно (24/7)</span>
+                    </div>
+                </div>
+                
+                <div class="booking-form">
+                    <h3 style="margin-bottom: 20px;">Онлайн Запись</h3>
+                    <form onsubmit="event.preventDefault(); alert('Спасибо за заявку! Мы свяжемся с вами в течение 5 минут.');">
+                        <div class="form-group">
+                            <label>Ваше имя</label>
+                            <input type="text" class="form-control" placeholder="Иван" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Номер телефона</label>
+                            <input type="tel" class="form-control" placeholder="+998" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Выберите класс мойки</label>
+                            <select class="form-control">
+                                <option>Стандарт</option>
+                                <option selected>Премиум Комплекс</option>
+                                <option>Детейлинг Люкс</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Автомойка «АкваБлеск». Все права защищены.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
